@@ -32,10 +32,13 @@ function init() {
 
 	// Truncate collapsible text when not in view
 	$('.collapsible li').click(function() {
-		if ($(this).hasClass('active'))
-			$(this).children('.collapsible-header').addClass('truncate');
-		else
-			$(this).children('.collapsible-header').removeClass('truncate');
+		var clicked = this;
+		$('.collapsible li').each(function(i) {
+			if ($(this) != $(clicked))
+				$(this).children('.collapsible-header').addClass('truncate');
+			else
+				$(this).children('.collapsible-header').removeClass('truncate');
+		});
 	});
 
 	// Bounce dat splash image
@@ -49,10 +52,10 @@ function init() {
 	$('#splash-img').click(function() {
 		if (!$(this).hasClass('spinning')) {
 			$img = $(this);
-			
+
 			$img.addClass('spin-me spinning');
 
-			setTimeout(function() { 
+			setTimeout(function() {
 				$img.removeClass('spin-me spinning');
 			}, 2000);
 		}
@@ -63,11 +66,10 @@ function init() {
 		effect($(this), 'shake', 2, 2);
 	});
 
-	// 
+	// Change my picture's size for medium/small screens
 	$(window).resize(function() {
 		updatePictureModalSize();
 	});
-
 }
 
 function updatePictureModalSize() {
