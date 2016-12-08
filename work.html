@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" href="resources/favicon.png" />
+	<title>Derek Plautz</title>
+
+	<!-- jQuery & jQuery UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+	<!-- Materialize -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+	<!-- Google Material Icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<!-- Font Awesome -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+	<!-- Main application js and css -->
+	<script src="js/app.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+	<!-- NAVIGATION -->
+	<header>
+		<div class="navbar-fixed">
+			<nav class="light-blue">
+				<div class="nav-wrapper">
+					<img id="nav-image" class="icon" src="resources/boy.svg" onclick="goHome();" />
+					<a href="index.html" class="brand-logo bold">Derek Plautz</a>
+
+					<ul class="right hide-on-med-and-down" style="margin-right: 2%;">
+						<li class="active"><a href="work.html" class="waves-effect waves-light">Work</a></li>
+						<li><a href="about.html" class="waves-effect waves-light">About</a></li>
+						<li><a href="contact.html" class="waves-effect waves-light">Contact</a></li>
+					</ul>
+
+					<a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">menu</i></a>
+				</div>
+			</nav>
+		</div>
+		<ul id="slide-out" class="side-nav green accent-2">
+			<li class="active"><a href="work.html" class="waves-effect waves-light"><i class="material-icons left">code</i>Work</a></li>
+			<li><a href="about.html" class="waves-effect waves-light"><i class="material-icons left">info_outline</i>About</a></li>
+			<li><a href="contact.html" class="waves-effect waves-light"><i class="material-icons left">email</i>Contact</a></li>
+		</ul>
+	</header>
+
+	<!-- CONTENT -->
+	<main>
+
+		<!-- begin modal content -->
+		<div id="tcp-gif" class="modal bottom-sheet green accent-2" style="max-height: 150%; max-width: 100vw;">
+			<div class="container">
+				<div class="col s12">
+					<p class="hide-on-med-and-up">IMAGE MAY BE DIFFICULT TO VIEW ON SMALLER SCREEN SIZES</p>
+					<p>
+						This recording shows a successful transfer of a 180kB image file from one machine to another. The client machine (top-left) sends the file to the server (bottom-right). The two machines share storage so the
+						<src>diff</src> command ran at the end (on the server) is able to compare the original file to the transferred one. The result is that the files do not differ.
+					</p>
+					<p>
+						The file transfers from the client to the TCP daemon on the client side. The TCP daemon then passes it the the "troll" which proceeds to send the packet into the network (perhaps altering the packet). The packet is received by the server side "troll" which can further alter the packet and then send it to the TCP daemon process. This process determines whether the packet's contents are okay or not and either buffers or drops the packet. The server process receives in-order data from the TCP daemon when it requests it.
+					</p>
+				</div>
+				<div class="col s12">
+					<img src="resources/tcp.gif" alt="tcp-using-udp" class="responsive-img">
+				</div>
+			</div>
+		</div>
+		<!-- end modal content -->
+
+		<!-- begin mobile display -->
+		<div class="container hide-on-large-only">
+			<ul class="collapsible popout" data-collapsible="accordion">
+				<li>
+					<div class="collapsible-header center-align truncate"><i class="material-icons right">file_upload</i>TCP Using UDP System Calls</div>
+					<div class="collapsible-body green accent-2">
+						<p>This project includes a suite of programs written in C that imitate network TCP behavior using only POSIX UDP/IP sockets. Because of the inherent lack of reliability with UDP, careful consideration and implementation went into creating this FTP application that mimicks TCP. Real network conditions are artificially created using a "troll" program which can delay, drop, garble, reorder, or duplicate single bits or entire packets (of around 1000 bytes).</p>
+						<p>The TCP daemon implements selective repeat which models <a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793</a> in some ways. The client side daemon is responsible for making sure all packets are successfully received on the server side as the server sends acknowledgments back to the client. The client can also resend unacknowledged packets back with the help of a timer that calculates a retransmission timeout for each packet. Additionally, checksums are used on both ends to ensure no bits of data are affected during transfer. Further, a circular array on both sides buffers data before transmission and wraps around appropriately.</p>
+						<a href="#tcp-gif" class="white grey-text text-darken-3 btn" onclick="restartGif('#tcp-gif img', 'resources/tcp.gif')"><i class="material-icons right">code</i>See it in action</a>
+					</div>
+				</li>
+				<li>
+					<div class="collapsible-header center-align truncate"><i class="material-icons right">file_upload</i>TCP Implementation Using UDP System Calls</div>
+					<div class="collapsible-body green accent-2">
+						<p>This project includes a suite of programs written in C that imitate network TCP behavior using only POSIX UDP/IP sockets. Because of the inherent lack of reliability with UDP, careful consideration and implementation went into creating this FTP application that mimicks TCP. Real network conditions are artificially created using a "troll" program which can delay, drop, garble, reorder, or duplicate single bits or entire packets (of around 1000 bytes).</p>
+						<p>The TCP daemon implements selective repeat which models <a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793</a> in some ways. The client side daemon is responsible for making sure all packets are successfully received on the server side as the server sends acknowledgments back to the client. The client can also resend unacknowledged packets back with the help of a timer that calculates a retransmission timeout for each packet. Additionally, checksums are used on both ends to ensure no bits of data are affected during transfer. Further, a circular array on both sides buffers data before transmission and wraps around appropriately.</p>
+						<a href="#tcp-gif" class="white grey-text text-darken-3 btn" onclick="restartGif('#tcp-gif img', 'resources/tcp.gif')"><i class="material-icons right">code</i>See it in action</a>
+					</div>
+				</li>
+				<li>
+					<div class="collapsible-header center-align truncate"><i class="material-icons right">file_upload</i>TCP Implementation Using UDP System Calls</div>
+					<div class="collapsible-body green accent-2">
+						<p>This project includes a suite of programs written in C that imitate network TCP behavior using only POSIX UDP/IP sockets. Because of the inherent lack of reliability with UDP, careful consideration and implementation went into creating this FTP application that mimicks TCP. Real network conditions are artificially created using a "troll" program which can delay, drop, garble, reorder, or duplicate single bits or entire packets (of around 1000 bytes).</p>
+						<p>The TCP daemon implements selective repeat which models <a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793</a> in some ways. The client side daemon is responsible for making sure all packets are successfully received on the server side as the server sends acknowledgments back to the client. The client can also resend unacknowledged packets back with the help of a timer that calculates a retransmission timeout for each packet. Additionally, checksums are used on both ends to ensure no bits of data are affected during transfer. Further, a circular array on both sides buffers data before transmission and wraps around appropriately.</p>
+						<a href="#tcp-gif" class="white grey-text text-darken-3 btn" onclick="restartGif('#tcp-gif img', 'resources/tcp.gif')"><i class="material-icons right">code</i>See it in action</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- end mobile display -->
+
+		<!-- begin desktop display -->
+		<div class="container hide-on-med-and-down">
+			<div class="row">
+				<div class="col s12">
+
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<span class="card-title">TCP Implementation Using UDP System Calls</span>
+							<p>This project includes a suite of programs written in C that imitate network TCP behavior using only POSIX UDP/IP sockets. Because of the inherent lack of reliability with UDP, careful consideration and implementation went into creating this FTP application that mimicks TCP. Real network conditions are artificially created using a "troll" program which can delay, drop, garble, reorder, or duplicate single bits or entire packets (of around 1000 bytes).</p>
+							<p>The TCP daemon implements selective repeat which models <a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793</a> in some ways. The client side daemon is responsible for making sure all packets are successfully received on the server side as the server sends acknowledgments back to the client. The client can also resend unacknowledged packets back with the help of a timer that calculates a retransmission timeout for each packet. Additionally, checksums are used on both ends to ensure no bits of data are affected during transfer. Further, a circular array on both sides buffers data before transmission and wraps around appropriately.</p>
+						</div>
+						<div class="card-action green accent-2">
+							<a href="#tcp-gif" class="white grey-text text-darken-3 btn" onclick="restartGif('#tcp-gif img', 'resources/tcp.gif')"><i class="material-icons right">code</i>See it in action</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<span class="card-title">Project/Job 1</span>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+
+							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<span class="card-title">Project/Job 1</span>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+
+							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+						</div>
+					</div>
+				</div>
+				<div class="col m6 s12">
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<span class="card-title">Project/Job 1</span>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+
+							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<span class="card-title">Project/Job 1</span>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+
+							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+						</div>
+					</div>
+				</div>
+				<div class="col m6 s12">
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<span class="card-title">Project/Job 1</span>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+
+							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end desktop display -->
+
+	</main>
+
+	<!-- FOOTER -->
+	<footer class="page-footer light-blue" style="margin-top: 0;">
+		<div class="row">
+			<div class="col s6 left-align grey-text text-darken-3">&copy; 2016 Derek Plautz</div>
+			<div class="col s6 right right-align">
+				<a class="social-link white-text" href="https://www.linkedin.com/in/derek-plautz-bb2219b7" target="_blank"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+				<a class="social-link white-text" href="https://www.facebook.com/dplautz" target="_blank"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+				<a class="social-link white-text" href="https://www.instagram.com/plautz_papa_johns/" target="_blank"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>
