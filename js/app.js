@@ -2,6 +2,8 @@
 $(updatePictureModalSize);
 $(init);
 
+var last_collapsible_clicked = null;
+
 /**
  * Initializes all event handlers
  * @return void
@@ -32,12 +34,27 @@ function init() {
 
 	// Truncate collapsible text when not in view
 	$('.collapsible li').click(function() {
-		var clicked = this;
-		$('.collapsible li').each(function(i) {
-			if ($(this) != $(clicked))
-				$(this).children('.collapsible-header').addClass('truncate');
-			else
-				$(this).children('.collapsible-header').removeClass('truncate');
+		console.clear();
+		var $clicked = $(this);
+
+		$('.collapsible li').each(function() {
+
+			var $next = $(this);
+			var $header = $next.children('.collapsible-header');
+
+			if ($next.is($clicked)) {
+
+				if ($next.is(last_collapsible_clicked)) {
+					$header.addClass('truncate');
+					last_collapsible_clicked = null;
+				} else {
+					$header.removeClass('truncate');
+					last_collapsible_clicked = $next;
+				}
+
+			} else {
+				$header.addClass('truncate');
+			}
 		});
 	});
 

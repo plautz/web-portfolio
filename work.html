@@ -59,20 +59,21 @@
 	<main class="valign-wrapper">
 
 		<!-- begin modal content -->
-		<div id="tcp-gif" class="modal bottom-sheet green accent-2" style="max-height: 150%; max-width: 100vw;">
+		<div id="tcp-gif" class="modal bottom-sheet green accent-2" style="max-height: 97vh; overflow-y: scroll;">
 			<div class="container">
 				<div class="col s12">
-					<p class="hide-on-med-and-up">IMAGE MAY BE DIFFICULT TO VIEW ON SMALLER SCREEN SIZES</p>
+					<p class="bold">Click/tap anywhere to dismiss
+						<br>(May need to scroll to view all)</p>
+					<p class="hide-on-med-and-up italic">IMAGE MAY BE DIFFICULT TO VIEW ON SMALLER SCREEN SIZES</p>
 					<p>
-						This recording shows a successful transfer of a 180kB image file from one machine to another. The client machine (top-left) sends the file to the server (bottom-right). The two machines share storage so the
-						<src>diff</src> command ran at the end (on the server) is able to compare the original file to the transferred one. The result is that the files do not differ.
+						This recording (below) shows a successful transfer of a 180kB image file from one machine to another. The client machine (top-left) sends the file to the server (bottom-right). The two machines share storage so the <src>diff</src> command ran at the end (on the server) is able to compare the original file to the transferred one. The result is that the files do not differ.
 					</p>
 					<p>
 						The file transfers from the client to the TCP daemon on the client side. The TCP daemon then passes it the the "troll" which proceeds to send the packet into the network (perhaps altering the packet). The packet is received by the server side "troll" which can further alter the packet and then send it to the TCP daemon process. This process determines whether the packet's contents are okay or not and either buffers or drops the packet. The server process receives in-order data from the TCP daemon when it requests it.
 					</p>
 				</div>
 				<div class="col s12">
-					<img src="resources/tcp.gif" alt="tcp-using-udp" class="responsive-img">
+					<img src="resources/tcp.gif" alt="tcp-using-udp" class="responsive-img modal-picture">
 				</div>
 			</div>
 		</div>
@@ -82,7 +83,7 @@
 		<div id="mobile" class="container hide-on-large-only">
 			<ul class="collapsible popout" data-collapsible="accordion">
 				<li>
-					<div class="collapsible-header center-align truncate"><i class="material-icons right">file_upload</i>TCP Using UDP System Calls</div>
+					<div class="collapsible-header truncate"><i class="material-icons right">file_upload</i><span>TCP Using UDP System Calls</span></div>
 					<div class="collapsible-body green accent-2">
 						<p>This project includes a suite of programs written in C that imitate network TCP behavior using only POSIX UDP/IP sockets. Because of the inherent lack of reliability with UDP, careful consideration and implementation went into creating this FTP application that mimicks TCP. Real network conditions are artificially created using a "troll" program which can delay, drop, garble, reorder, or duplicate single bits or entire packets (of around 1000 bytes).</p>
 						<p>The TCP daemon implements selective repeat which models <a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793</a> in some ways. The client side daemon is responsible for making sure all packets are successfully received on the server side as the server sends acknowledgments back to the client. The client can also resend unacknowledged packets back with the help of a timer that calculates a retransmission timeout for each packet. Additionally, checksums are used on both ends to ensure no bits of data are affected during transfer. Further, a circular array on both sides buffers data before transmission and wraps around appropriately.</p>
@@ -91,11 +92,54 @@
 				</li>
 				<br>
 				<li>
-					<div class="collapsible-header center-align truncate"><i class="material-icons right">file_upload</i>TCP Using UDP System Calls</div>
+					<div class="collapsible-header truncate"><i class="material-icons right">mode_edit</i><span>Ohio State Teaching Assistant</span></div>
 					<div class="collapsible-body green accent-2">
-						<p>This project includes a suite of programs written in C that imitate network TCP behavior using only POSIX UDP/IP sockets. Because of the inherent lack of reliability with UDP, careful consideration and implementation went into creating this FTP application that mimicks TCP. Real network conditions are artificially created using a "troll" program which can delay, drop, garble, reorder, or duplicate single bits or entire packets (of around 1000 bytes).</p>
-						<p>The TCP daemon implements selective repeat which models <a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793</a> in some ways. The client side daemon is responsible for making sure all packets are successfully received on the server side as the server sends acknowledgments back to the client. The client can also resend unacknowledged packets back with the help of a timer that calculates a retransmission timeout for each packet. Additionally, checksums are used on both ends to ensure no bits of data are affected during transfer. Further, a circular array on both sides buffers data before transmission and wraps around appropriately.</p>
-						<a href="#tcp-gif" class="white grey-text text-darken-3 btn" onclick="restartGif('#tcp-gif img', 'resources/tcp.gif')"><i class="material-icons right">code</i>See it in action</a>
+						<p>I have been an undergraduate teaching assistant for three years for the <a href="https://eed.osu.edu/" target="_blank">Department of Engineering Education</a>. I specifically helped with incoming freshmen and transfer students in courses that deal with problem solving basics, lab write-ups, computer programming, and autocad. Additionally, I have graded for a foundations of computer science course at Ohio State</p>
+					</div>
+				</li>
+				<br>
+				<li>
+					<div class="collapsible-header truncate"><i class="material-icons right">memory</i><span>Pedantic Interactive Cache Simulator</span></div>
+					<div class="collapsible-body green accent-2">
+						<p>Under the instruction of <a href="http://web.cse.ohio-state.edu/~jonejeff/" target="_blank">Dr. Jeffrey Jones</a>, a small group of students, myself included, have been creating a web application to be used for educational purposes in a parallel computing course in CSE at Ohio State. This will be able to visualize the memory cache usage of an arbitrary snippet of code. Parameters such as cache size, block size, number of sets, and replacement strategy can all be tweaked. Additionally, the user has the ability to input matrix data structures of variable length and element size that the code snippet uses. The frontend uses HTML/CSS/JS with Bootstrap and jQuery, while the backend is coded in C++.</p>
+						<a href="#" class="row valign-wrapper white grey-text text-darken-3 btn disabled" style="height: auto;"><i class="material-icons right">code</i>See it live (Soon!)</a>
+					</div>
+				</li>
+				<br>
+				<li>
+					<div class="collapsible-header truncate"><i class="material-icons right">music_note</i><span>Digital Audio Player</span></div>
+					<div class="collapsible-body green accent-2">
+						<p>Written in C#.NET, this is a multi-threaded Windows Forms application that is able to load and playback <src>.mp3</src> and <src>.wav</src> files. A user can add any number of artists to the program with each artist having any number of songs. The application maintains persistent data by serializing data structures to a readable XML format that can be saved and loaded by the user in the form of <src>.audio</src> files. The music is played using the <a href="https://naudio.codeplex.com/">NAudio</a> .NET library. Music playback was handled using separate threads that dealt with UI updates and event handlers.</p>
+						<a href="https://github.com/plautz/winforms-music-player" target="_blank" class="white grey-text text-darken-3 btn"><i class="material-icons right">code</i>View on GitHub</a>
+					</div>
+				</li>
+				<br>
+				<li>
+					<div class="collapsible-header truncate"><i class="material-icons right">storage</i><span>Verizon x86 Windows/Linux Cloud Services</span></div>
+					<div class="collapsible-body green accent-2">
+						<p>I worked two internships with Verizon Wireless in their IT department for the x86 Windows/Linux Cloud Services team. The Cloud Services team is responsible for standing up servers for application teams. Because of the push towards the cloud, I wrote various PowerShell/Bash scripts to automate different processes in the build stage. I have a server audit script that is currently still in production today. This script runs in parallel on thousands of Linux production servers and determines if their network interfaces are correctly configured.</p>
+					</div>
+				</li>
+				<br>
+				<li>
+					<div class="collapsible-header center-align truncate"><i class="material-icons right">record_voice_over</i><span>Alexa &amp; AWS Applications</span></div>
+					<div class="collapsible-body green accent-2">
+						<ul class="collapsible" data-collapsible="accordion" style="margin: 0;">
+							<li>
+								<div class="collapsible-header dropdown-icon"><i class="material-icons left">keyboard_arrow_down</i>News Grabber</div>
+								<div class="collapsible-body">
+									<p>During the second internship with Verizon, all IT interns participated in a competitive hackathon to produce the top application that ran on the Amazon Echo using the Alexa platform for speech processing. My group produced a news application called Grabber that <span class="italic">grabbed</span> news articles for the user based off preference. The application was written in Node.js and hosted on <a href="https://aws.amazon.com/lambda/" target="_blank">AWS Lambda</a> which is a serverless compute platform that automatically scales with demand.</p>
+									<p>Grabber compiles news articles for the user, built a dynamic webpage hosted on an <a href="https://aws.amazon.com/ec2/" target="_blank">AWS EC2</a> instance, and texted the user a personalized link to the page using the <a href="https://www.twilio.com/" target="_blank">Twilio API</a>.</p>
+								</div>
+							</li>
+							<li>
+								<div class="collapsible-header dropdown-icon"><i class="material-icons left">keyboard_arrow_down</i>Chuck Norris &amp; Ron Swanson</div>
+								<div class="collapsible-body">
+									<p>In addition to Grabber, I have created a couple fun Alexa apps to play around with the framework. They are a Chuck Norris joke teller and Ron Swanson quote getter... because why not! These are also hosted on AWS Lambda and are soon to be released to the Alexa app market where they will be publicly available.</p>
+									<a href="https://github.com/plautz/chuck-n-ron" target="_blank" class="white grey-text text-darken-3 btn"><i class="material-icons right">code</i>View on GitHub</a>
+								</div>
+							</li>
+						</ul>
 					</div>
 				</li>
 			</ul>
@@ -105,11 +149,10 @@
 		<!-- begin desktop display -->
 		<div id="desktop" class="container hide-on-med-and-down">
 			<div class="row">
-				<div class="col s12">
-
+				<div class="col s10 offset-s1">
 					<div class="card white grey-text text-darken-3 hoverable">
 						<div class="card-content">
-							<span class="card-title">TCP Implementation Using UDP System Calls</span>
+							<div class="card-title valign-wrapper"><i class="material-icons left">file_upload</i>TCP Implementation Using UDP System Calls</div>
 							<p>This project includes a suite of programs written in C that imitate network TCP behavior using only POSIX UDP/IP sockets. Because of the inherent lack of reliability with UDP, careful consideration and implementation went into creating this FTP application that mimicks TCP. Real network conditions are artificially created using a "troll" program which can delay, drop, garble, reorder, or duplicate single bits or entire packets (of around 1000 bytes).</p>
 							<p>The TCP daemon implements selective repeat which models <a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793</a> in some ways. The client side daemon is responsible for making sure all packets are successfully received on the server side as the server sends acknowledgments back to the client. The client can also resend unacknowledged packets back with the help of a timer that calculates a retransmission timeout for each packet. Additionally, checksums are used on both ends to ensure no bits of data are affected during transfer. Further, a circular array on both sides buffers data before transmission and wraps around appropriately.</p>
 						</div>
@@ -117,73 +160,83 @@
 							<a href="#tcp-gif" class="white grey-text text-darken-3 btn" onclick="restartGif('#tcp-gif img', 'resources/tcp.gif')"><i class="material-icons right">code</i>See it in action</a>
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<div class="row">
-				<div class="col s12">
+				<div class="col s10 offset-s1">
 					<div class="card white grey-text text-darken-3 hoverable">
 						<div class="card-content">
-							<span class="card-title">Project/Job 1</span>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+							<div class="card-title valign-wrapper"><i class="material-icons left">mode_edit</i>Ohio State Teaching Assistant</div>
+							<p>I have been an undergraduate teaching assistant for three years for the <a href="https://eed.osu.edu/" target="_blank">Department of Engineering Education</a>. I specifically helped with incoming freshmen and transfer students in courses that deal with problem solving basics, lab write-ups, computer programming, and autocad. Additionally, I have graded for a foundations of computer science course at Ohio State</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col m6 s12">
+				<div class="col s10 offset-s1">
 					<div class="card white grey-text text-darken-3 hoverable">
 						<div class="card-content">
-							<span class="card-title">Project/Job 1</span>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+							<div class="card-title valign-wrapper"><i class="material-icons left">memory</i>Pedantic Interactive Cache Simulator</div>
+							<p>Under the instruction of <a href="http://web.cse.ohio-state.edu/~jonejeff/" target="_blank">Dr. Jeffrey Jones</a>, a small group of students, myself included, have been creating a web application to be used for educational purposes in a parallel computing course in CSE at Ohio State. This will be able to visualize the memory cache usage of an arbitrary snippet of code. Parameters such as cache size, block size, number of sets, and replacement strategy can all be tweaked. Additionally, the user has the ability to input matrix data structures of variable length and element size that the code snippet uses. The frontend uses HTML/CSS/JS with Bootstrap and jQuery, while the backend is coded in C++.</p>
 						</div>
-					</div>
-				</div>
-				<div class="col m6 s12">
-					<div class="card white grey-text text-darken-3 hoverable">
-						<div class="card-content">
-							<span class="card-title">Project/Job 1</span>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+						<div class="card-action green accent-2">
+							<a href="#" class="white grey-text text-darken-3 btn disabled"><i class="material-icons right">code</i>See it live (Coming soon)</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col m6 s12">
+				<div class="col s10 offset-s1">
 					<div class="card white grey-text text-darken-3 hoverable">
 						<div class="card-content">
-							<span class="card-title">Project/Job 1</span>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+							<div class="card-title valign-wrapper"><i class="material-icons left">music_note</i>Digital Audio Player</div>
+							<p>Written in C#.NET, this is a multi-threaded Windows Forms application that is able to load and playback <src>.mp3</src> and <src>.wav</src> files. A user can add any number of artists to the program with each artist having any number of songs. The application maintains persistent data by serializing data structures to a readable XML format that can be saved and loaded by the user in the form of <src>.audio</src> files. The music is played using the <a href="https://naudio.codeplex.com/">NAudio</a> .NET library. Music playback was handled using separate threads that dealt with UI updates and event handlers.</p>
 						</div>
-					</div>
-				</div>
-				<div class="col m6 s12">
-					<div class="card white grey-text text-darken-3 hoverable">
-						<div class="card-content">
-							<span class="card-title">Project/Job 1</span>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-							<p>Sed dignissim lacinia nunc. <b>Praesent mauris</b>. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+						<div class="card-action green accent-2">
+							<a href="https://github.com/plautz/winforms-music-player" target="_blank" class="white grey-text text-darken-3 btn"><i class="material-icons right">code</i>View on GitHub</a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- end desktop display -->
+			<div class="row">
+				<div class="col s10 offset-s1">
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<div class="card-title valign-wrapper"><i class="material-icons left">storage</i>Verizon x86 Windows/Linux Cloud Services</div>
+							<p>I worked two internships with Verizon Wireless in their IT department for the x86 Windows/Linux Cloud Services team. The Cloud Services team is responsible for standing up servers for application teams. Because of the push towards the cloud, I wrote various PowerShell/Bash scripts to automate different processes in the build stage. I have a server audit script that is currently still in production today. This script runs in parallel on thousands of Linux production servers and determines if their network interfaces are correctly configured.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s10 offset-s1">
+					<div class="card white grey-text text-darken-3 hoverable">
+						<div class="card-content">
+							<div class="card-title valign-wrapper"><i class="material-icons left">record_voice_over</i>Alexa &amp; AWS Applications</div>
+							<p>During the second internship with Verizon, all IT interns participated in a competitive hackathon to produce the top application that ran on the Amazon Echo using the Alexa platform for speech processing. My group produced a news application called Grabber that <span class="italic">grabbed</span> news articles for the user based off preference. The application was hosted on <a href="https://aws.amazon.com/lambda/" target="_blank">AWS Lambda</a> which is a serverless compute platform that automatically scales with demand.</p>
+							<p>Grabber compiles news articles for the user, built a dynamic webpage hosted on an <a href="https://aws.amazon.com/ec2/" target="_blank">AWS EC2</a> instance, and texted the user a personalized link to the page using the <a href="https://www.twilio.com/" target="_blank">Twilio API</a>.</p>
+							<hr>
+							<p>In addition to Grabber, I have created a couple fun Alexa apps to play around with the framework. They are a Chuck Norris joke teller and Ron Swanson quote getter... because why not! These are also hosted on AWS Lambda and are soon to be released to the Alexa app market where they will be publicly available. Follow the button to view the source code.</p>
+						</div>
+						<div class="card-action green accent-2">
+							<a href="https://github.com/plautz/chuck-n-ron" target="_blank" class="white grey-text text-darken-3 btn"><i class="material-icons right">code</i>View on GitHub</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end desktop display -->
 
 	</main>
 
 	<!-- FOOTER -->
 	<footer class="page-footer light-blue" style="margin-top: 0;">
-		<div class="row">
-			<div class="col s6 left-align grey-text text-darken-3">&copy; 2016 Derek Plautz</div>
+		<div class="row valign-wrapper">
+			<div class="col s6 left-align grey-text text-darken-3">
+				&copy; 2016 Derek Plautz
+				<br>
+				<a href="https://github.com/plautz/web-portfolio" target="_blank" class="grey-text text-darken-2" style="font-size: 70%;">View this site's source code!</a>
+			</div>
 			<div class="col s6 right right-align">
 				<a class="social-link white-text" href="https://www.linkedin.com/in/derek-plautz-bb2219b7" target="_blank"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
 				<a class="social-link white-text" href="https://www.facebook.com/dplautz" target="_blank"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
